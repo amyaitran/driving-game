@@ -2,6 +2,7 @@
 /* exported data */
 
 var $car = document.querySelector('img');
+var runCar = null;
 
 window.addEventListener('keydown', handleKeyDown);
 
@@ -19,13 +20,23 @@ function handleKeyDown(event) {
     $car.className = 'up';
     data.direction = 'up';
   } else if (event.key === ' ') {
-    moveCarForward();
+    if (data.running === false) {
+      startCar();
+      data.running = true;
+    } else {
+      stopCar();
+      data.running = false;
+    }
   }
 }
 
-function moveCarForward() {
-  setInterval(function () {
-    $car.style.left = data.location.x + 3 + 'px';
-    data.location.x += 3;
+function startCar() {
+  runCar = setInterval(function () {
+    $car.style.left = data.location.x + 6 + 'px';
+    data.location.x += 6;
   }, 16);
+}
+
+function stopCar() {
+  clearInterval(runCar);
 }
