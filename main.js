@@ -32,8 +32,19 @@ function handleKeyDown(event) {
 
 function startCar() {
   runCar = setInterval(function () {
-    $car.style.left = data.location.x + 6 + 'px';
-    data.location.x += 6;
+    if (data.direction === 'right') {
+      $car.style.left = data.location.x + 6 + 'px';
+      data.location.x += 6;
+    } else if (data.direction === 'left') {
+      $car.style.left = data.location.x - 6 + 'px';
+      data.location.x -= 6;
+    } else if (data.direction === 'up') {
+      $car.style.top = data.location.y - 6 + 'px';
+      data.location.y -= 6;
+    } else if (data.direction === 'down') {
+      $car.style.top = data.location.y + 6 + 'px';
+      data.location.y += 6;
+    }
   }, 16);
 }
 
